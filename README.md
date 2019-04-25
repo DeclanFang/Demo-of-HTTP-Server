@@ -6,3 +6,5 @@ The server has multiple functions, like encapsulating HTTP protocol version, sta
 I've also encapsulated the Response and Request which is easier to modulate and improve. 
 
 During the second upload, I've created a function named Dispatcher, which can distinguish the aim of our operation like login or register, also I have target servlets, and I build a mini frontend to test the performance of the Dispatcher: 
+
+![image](https://github.com/Yesi-hoang/TaoBaoTopLine/blob/master/Gif/TaoBaoTopLineGif.gif)
