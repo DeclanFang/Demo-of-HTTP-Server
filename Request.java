@@ -2,12 +2,12 @@ package com.declan.server;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * Encapsulate Request
+ * @author Declan
  */
 
 public class Request {
@@ -83,6 +83,64 @@ public class Request {
         }
 
         //Store the parameters into the Map
+        if(paramString.equals("")) {
+            return;
+        }
+        parseParams(paramString);
+    }
 
+    private void parseParams(String paramString) {
+        StringTokenizer token = new StringTokenizer(paramString,"&");
+        while(token.hasMoreTokens()) {
+            String keyValue = token.nextToken();
+            String[] keyValues = keyValue.split("=");
+            if(keyValues.length == 1) {
+                keyValues = Arrays.copyOf(keyValues, 2);
+                keyValues[1] = null;
+            }
+
+            String key = keyValues[0].trim();
+            String value = keyValues[1] == null ? null : decode(keyValues[1].trim(),"gbk");
+            if(!parameterMapValues.containsKey(key)) {
+                parameterMapValues.put(key, new ArrayList<String>());
+            }
+
+            List<String> values = parameterMapValues.get(key);
+            values.add(value);
+        }
+    }
+
+    private String decode(String value, String code) {
+        try {
+            return java.net.URLDecoder.decode(value, code);
+        } catch (UnsupportedEncodingException e) {
+            //e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getParameterValues(String name) {
+        List<String> values = null;
+        if((values = parameterMapValues.get(name)) == null) {
+            return null;
+        }
+        else {
+            return values.toArray(new String[0]);
+        }
+    }
+
+    /**
+     * Get certain value
+     */
+    public String getParameter(String name) {
+        String[] values = getParameterValues(name);
+        if(values == null) {
+            return null;
+        }
+        return values[0];
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

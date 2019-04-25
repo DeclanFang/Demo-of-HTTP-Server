@@ -13,6 +13,8 @@ public class Server {
     private ServerSocket server = null;
     public static final String CRLF = "\r\n";
     public static final String BLANK = " ";
+    private boolean isShutDown = false;
+
     public static void main(String[] args) {
 
         Server server = new Server();
@@ -21,12 +23,17 @@ public class Server {
     }
 
     public void start() {
+        start(8888);
+    }
+
+    public void start(int port) {
         try {
-            server = new ServerSocket(8888);
+            server = new ServerSocket(port);
 
             this.receive();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            stop();
         }
     }
 
@@ -36,18 +43,9 @@ public class Server {
 
     private void receive() {
         try {
-            Socket client = server.accept();
-
-            //Request
-            Request req = new Request(client.getInputStream());
-
-
-            //Response
-            Response res = new Response(client.getOutputStream());
-            res.println("<html><head><title>HTTP Example</title>");
-            res.println("</head><body>Hello Tomcat! </body></html>");
-            res.pushToClient(500);
-
+            while(!isShutDown) {
+                new Thread(new Dispatcher(server.accept())).start();
+            }
             /*
             StringBuilder response = new StringBuilder();
             // HTTP Protocol Version、State Code、Description
@@ -70,10 +68,12 @@ public class Server {
 
         } catch (IOException e) {
             //e.printStackTrace();
+            stop();
         }
     }
 
     public void stop() {
-
+        isShutDown = true;
+        CloseUtil.closeAll(server);
     }
 }
