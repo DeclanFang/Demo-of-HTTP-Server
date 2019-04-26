@@ -1,4 +1,7 @@
-package com.declan.server;
+package com.declan.HTTPServer.servlet;
+
+import com.declan.HTTPServer.server.Request;
+import com.declan.HTTPServer.server.Response;
 
 public abstract class Servlet {
     public void service(Request req, Response res) throws Exception {
@@ -6,6 +9,6 @@ public abstract class Servlet {
         this.doPost(req,res);
     }
 
-    public abstract void doGet(Request req, Response res) throws Exception;
-    public abstract void doPost(Request req, Response res) throws Exception;
+    protected abstract void doGet(Request req, Response res) throws Exception;
+    protected abstract void doPost(Request req, Response res) throws Exception;
 }

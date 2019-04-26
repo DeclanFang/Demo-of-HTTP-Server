@@ -1,4 +1,8 @@
-package com.declan.server;
+package com.declan.HTTPServer.servlet;
+
+import com.declan.HTTPServer.server.Request;
+import com.declan.HTTPServer.server.Response;
+import com.declan.HTTPServer.servlet.Servlet;
 
 public class LoginServlet extends Servlet {
     @Override
