@@ -1,4 +1,4 @@
-package com.declan.server;
+package com.declan.HTTPServer.server;
 
 import java.io.IOException;
 import java.io.InputStream;

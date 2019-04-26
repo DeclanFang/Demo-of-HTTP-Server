@@ -1,4 +1,7 @@
-package com.declan.server;
+package com.declan.HTTPServer.server;
+
+import com.declan.HTTPServer.servlet.Servlet;
+import com.declan.HTTPServer.util.CloseUtil;
 
 import java.io.IOException;
 import java.net.Socket;
