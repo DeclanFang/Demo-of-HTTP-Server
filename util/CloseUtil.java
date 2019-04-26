@@ -5,7 +5,6 @@ import java.io.IOException;
 
 /**
  * Approach to shut down the stream
- * @author Declan
  */
 
 public class CloseUtil {
