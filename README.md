@@ -9,6 +9,6 @@ During the second upload, I've created a function named Dispatcher, which can di
 
 ![image](https://github.com/DeclanFang/Demo-of-HTTP-Server/blob/master/DemoPre/Demo01.gif)
 
-For the third update, I reschedule the order of the files to make it classified into the frontend, backend(server) and some others, which makes the project easier to modulate in the future. And in this update, I rebuild the Dispatcher into an XML file, which makes the engineer(me) feel free to make any change without harming the core files. 
+For the third update, I rescheduled the order of the files to make it classified into the frontend, backend(server) and some others, which makes the project easier to modulate in the future. And in this update, I rebuild the Dispatcher into an XML file, which makes the engineer(me) feel free to make any change without harming the core files. 
 
 The most difficult part is the parsing of the XML file into the information we need (like which URL we aim, what is the name of the servlet and its address), so I extended from the DefaultHandler interface. Because of that, I can easily add other servlets into the server. 
